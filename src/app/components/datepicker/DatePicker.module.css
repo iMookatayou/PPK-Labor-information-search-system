@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Sarabun&display=swap');
+
+.datePickerRow {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: flex-end; 
+  flex-wrap: wrap;
+  font-family: 'Sarabun', sans-serif;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.dateInput {
+  padding: 8.5px 14px;
+  font-size: 1rem;
+  height: 40px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  width: 160px;
+}
+
+.boldLabel {
+  font-weight: 600;
+  color: #333;
+}

@@ -1,0 +1,53 @@
+.buttonContainer {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.1s ease;
+  border: none;
+  font-family: 'Sarabun', sans-serif;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.button:active {
+  transform: scale(0.97);
+}
+
+.search {
+  background-color: #1F3B5C;  
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(31, 59, 92, 0.4);
+}
+
+.search:hover {
+  background-color: #16304C;  
+  box-shadow: 0 4px 12px rgba(22, 48, 76, 0.6);
+}
+
+.clear {
+  background-color: #DCEAF7;   
+  color: #1c3d6e;              
+  box-shadow: 0 2px 6px rgba(220, 234, 247, 0.4);
+}
+
+.clear:hover {
+  background-color: #c3d8ec;  
+  box-shadow: 0 4px 12px rgba(195, 216, 236, 0.6);
+}
+
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  stroke-width: 2;
+  color: inherit;
+}

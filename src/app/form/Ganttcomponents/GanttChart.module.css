@@ -1,0 +1,222 @@
+/* =========================================
+   FONT IMPORT
+========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap');
+
+
+/* =========================================
+   BASE STYLES & CONTAINER
+========================================= */
+.ganttContainer {
+  padding: 2rem;
+  max-width: 100%;
+  overflow-x: auto;
+
+  background-color: #ffffff;  /* เปลี่ยนจาก gradient เป็นสีขาวเรียบ */
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+
+  font-family: 'Sarabun', sans-serif;
+  font-size: 16px;
+  color: #111827;
+
+  /* Smooth transition for hover effects */
+  transition: all 0.3s ease;
+
+  /* Scrollbar Styling for Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: #3b82f6 #f3f4f6;
+}
+
+/* Scrollbar Styling for Webkit browsers (Chrome, Safari, Edge) */
+.ganttContainer::-webkit-scrollbar {
+  height: 8px;
+}
+
+.ganttContainer::-webkit-scrollbar-track {
+  background: #f3f4f6;
+  border-radius: 8px;
+}
+
+.ganttContainer::-webkit-scrollbar-thumb {
+  background-color: #3b82f6;
+  border-radius: 8px;
+}
+
+
+/* =========================================
+   HEADER (TABLE TITLE)
+========================================= */
+.tableHeader {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: #1e3a8a;
+
+  text-align: center;
+  text-shadow: 1px 1px 2px rgba(30, 58, 138, 0.1);
+
+  margin-bottom: 1.5rem;
+}
+
+
+/* =========================================
+   MAIN GANTT TABLE
+========================================= */
+.ganttTable {
+  width: 100%;
+  min-width: 1000px;
+  border-collapse: separate; /* เพื่อใช้ border-radius ได้ */
+  border-spacing: 0;
+  overflow: hidden;
+
+  background-color: #ffffff;
+  border-radius: 12px;
+
+  /* ป้องกันปัญหา overflow หรือเลื่อนซ้อนกัน */
+  table-layout: fixed;
+  word-break: break-word; /* ช่วยให้ข้อความในเซลล์ไม่ล้น */
+}
+
+/* --- TABLE HEADERS --- */
+.ganttTable th {
+  padding: 14px 20px;
+
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #374151;
+
+  background-color: #f3f4f6;
+  box-shadow: inset 0 -2px 3px rgba(0, 0, 0, 0.05);
+
+  /* ทำให้หัวตารางติดกับด้านบนเวลา scroll */
+  position: sticky;
+  top: 0;
+  z-index: 2;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --- TABLE CELLS --- */
+.ganttTable td {
+  padding: 14px 20px;
+
+  font-size: 0.92rem;
+  font-weight: 400;
+  color: #374151;
+
+  background-color: #ffffff;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+/* --- ALTERNATE ROW COLOR (STRIPED) --- */
+.ganttTable tr:nth-child(2n) {
+  background-color: #f9f9f9 !important;
+}
+
+/* --- ROWS --- */
+.ganttTable tr {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: default;
+}
+
+/* --- ROW HOVER EFFECT --- */
+.ganttTable tr:hover {
+  transform: scale(1.01);
+  box-shadow: inset 4px 0 0 #3b82f6;
+  cursor: pointer;
+}
+
+.ganttTable tr:hover td {
+  background-color: #eef2ff !important;
+  color: #1c3d6e;
+}
+
+
+/* =========================================
+   TABLE BORDER RADIUS (ROUNDED CORNERS)
+========================================= */
+.ganttTable th:first-child {
+  border-top-left-radius: 12px;
+}
+
+.ganttTable th:last-child {
+  border-top-right-radius: 12px;
+}
+
+.ganttTable tr:last-child td:first-child {
+  border-bottom-left-radius: 12px;
+}
+
+.ganttTable tr:last-child td:last-child {
+  border-bottom-right-radius: 12px;
+}
+
+/* --- REMOVE BORDER FOR LAST ROW CELLS --- */
+.ganttTable tr:last-child td {
+  border-bottom: none;
+}
+
+
+/* =========================================
+   INNER TABLE (สำหรับรายละเอียดในตารางย่อย)
+========================================= */
+.innerTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.innerTable th,
+.innerTable td {
+  border: 1px solid #ddd;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.innerTable thead tr th {
+  font-weight: bold;
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+
+/* =========================================
+   RESPONSIVE STYLES (MOBILE & TABLET)
+========================================= */
+@media (max-width: 768px) {
+  .ganttContainer {
+    padding: 1rem;
+    font-size: 14px;
+  }
+
+  .tableHeader {
+    font-size: 1.5rem;
+  }
+
+  .ganttTable th,
+  .ganttTable td {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+    max-width: 200px;
+  }
+
+  .ganttTable {
+    min-width: 600px;
+  }
+}
