@@ -1,0 +1,35 @@
+/* ExportXlsxButton.module.css */
+
+.button {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.35rem 0.8rem;
+  height: 2rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  font-family: 'Sarabun', sans-serif;
+  border-radius: 6px;
+  border: 1px solid #059669;
+  color: #ffffff;
+  cursor: pointer;
+  background: linear-gradient(to right, #10b981, #059669);
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.4);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  line-height: 1;
+  margin-top: auto;         /* ✅ ดันลงล่างสุดของกล่องแม่ */
+  align-self: flex-end;     /* ✅ ให้แนบขอบล่างเสมอ */
+  box-sizing: border-box;
+}
+
+.button:hover {
+  background: linear-gradient(to right, #059669, #047857);
+  box-shadow: 0 4px 8px rgba(5, 150, 105, 0.4);
+}
+
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  stroke-width: 2;
+  color: inherit;
+}
