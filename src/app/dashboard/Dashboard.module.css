@@ -1,0 +1,174 @@
+/* ===================== Dashboard.module.css ===================== */
+/* ---- Theme tokens (scoped) ---- */
+.wrap {
+  --bg: #f6f7fb;
+  --surface: #ffffff;
+  --stroke: #cbd5e1;      /* เส้นปุ่มรอง (ปกติ) */
+  --stroke-strong: #94a3b8; /* เส้นปุ่มรอง (hover) */
+
+  --ink-900: #0f172a;     /* ข้อความหลัก */
+  --ink-700: #1e293b;     /* หัวข้อในการ์ด */
+  --ink-500: #475569;     /* คำอธิบาย */
+
+  --blue-700: #1e40af;    /* primary hover/active */
+  --blue-600: #1d4ed8;    /* primary base */
+  --blue-50:  #eff6ff;    /* hover bg จาง */
+
+  --focus: #bfdbfe;
+
+  --radius-lg: 12px;
+  --radius-md: 10px;
+
+  --gap: 16px;
+
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+  color: var(--ink-900);
+  font-family: system-ui, -apple-system, 'Sarabun', 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ---- Container ---- */
+.container {
+  width: min(100%, 980px);
+  padding: max(24px, env(safe-area-inset-top))
+           max(24px, env(safe-area-inset-right))
+           max(24px, env(safe-area-inset-bottom))
+           max(24px, env(safe-area-inset-left));
+}
+
+/* ---- Header ---- */
+.header {
+  text-align: center;
+  margin-bottom: 18px;
+}
+.title {
+  margin: 0 0 6px 0;
+  font-size: clamp(22px, 2.4vw, 28px);
+  font-weight: 800;
+  letter-spacing: .2px;
+}
+.subtitle {
+  margin: 0;
+  color: var(--ink-500);
+  font-size: clamp(14px, 1.4vw, 18px);
+}
+
+/* ---- Grid ---- */
+.grid {
+  display: grid;
+  gap: var(--gap);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  margin-top: 16px;
+}
+
+/* ---- Card / Button base (no glow) ---- */
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* จัดกึ่งกลางแนวตั้ง */
+  align-items: center;
+  gap: 6px;
+
+  min-height: 110px;            /* สูงเท่ากันทุกใบ */
+  padding: 20px;
+
+  background: var(--surface);
+  border: 1.5px solid var(--stroke);
+  border-radius: var(--radius-lg);
+
+  text-align: center;
+  cursor: pointer;
+
+  transition: background .18s ease, border-color .18s ease, transform .08s ease;
+  outline: 3px solid transparent;
+}
+
+.card:hover {
+  background: #f8fafc;          /* จางขึ้นนิดเพื่อบอก hover */
+  border-color: var(--stroke-strong);
+}
+.card:active { transform: translateY(1px); }
+.card:focus-visible {
+  outline-color: var(--focus);
+  outline-offset: 2px;
+}
+
+/* เส้น highlight บาง ๆ ใต้ปุ่มตอน hover (ไม่ใช่เงา) */
+.card::after {
+  content: "";
+  display: block;
+  height: 3px;
+  width: 56%;
+  background: transparent;
+  border-radius: 3px;
+  transition: background .18s ease, width .18s ease;
+}
+.card:hover::after {
+  background: #dbeafe;          /* ฟ้าอ่อนมาก */
+  width: 64%;
+}
+
+/* ---- Primary / Secondary ---- */
+.primary {
+  background: var(--blue-600);  /* flat ไม่ใช้ gradient */
+  border-color: var(--blue-600);
+  color: #ffffff;
+}
+.primary:hover {
+  background: var(--blue-700);  /* เข้มขึ้นเล็กน้อยตอน hover */
+  border-color: var(--blue-700);
+}
+.primary::after { background: rgba(255,255,255,.28); }
+.primary:hover::after { background: rgba(255,255,255,.38); }
+
+.secondary {
+  /* ใช้ค่าพื้นฐานของ .card */
+}
+
+/* ---- Typography inside card ---- */
+.cardLabel {
+  font-weight: 800;
+  font-size: clamp(16px, 1.8vw, 20px);
+  line-height: 1.24;
+  color: inherit;               /* primary = ขาว, secondary = น้ำเงินเข้มหรือดำ */
+}
+.cardDesc {
+  font-size: 14px;
+  color: var(--ink-500);
+}
+.primary .cardDesc { color: #e0e7ff; }
+
+/* ---- Footer & Ghost button ---- */
+.footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.ghost {
+  appearance: none;
+  background: #eef2f7;
+  border: 1.5px solid #d2dae6;
+  color: #334155;
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease, transform .08s ease;
+  min-height: 40px;
+}
+.ghost:hover {
+  background: #e6edf7;
+  border-color: #c5d2e6;
+}
+.ghost:active { transform: translateY(1px); }
+.ghost:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* ---- Reduce motion for accessibility ---- */
+@media (prefers-reduced-motion: reduce) {
+  .card, .ghost { transition: none; }
+}

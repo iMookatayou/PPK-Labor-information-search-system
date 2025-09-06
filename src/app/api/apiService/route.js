@@ -1,6 +1,12 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://172.16.78.22/ppk11/his';
+if (!process.env.NEXT_PUBLIC_API_BASE_URL) {
+  throw new Error(
+    'NEXT_PUBLIC_API_BASE_URL is not defined in .env.local'
+  );
+}
+
+const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL.trim();
 
 export const fetchLocations = async () => {
   try {
@@ -40,7 +46,10 @@ export const fetchContact = async (payload) => {
 
     console.log('[fetchContact] payload ที่ใช้:', filteredPayload);
 
-    const response = await axios.post(`${BASE_URL}/findPatreg/Contact`, filteredPayload);
+    const response = await axios.post(
+      `${BASE_URL}/findPatreg/Contact`,
+      filteredPayload
+    );
     const data = response.data?.data;
 
     if (!data || (Array.isArray(data) && data.length === 0)) {

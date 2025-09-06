@@ -1,34 +1,11 @@
-"use client";
-import { useState } from "react";
+// src/app/login/page.js
+export const dynamic = 'force-dynamic';
 
-export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+import LoginClient from './LoginClient';
 
-  async function handleLogin(e) {
-    e.preventDefault();
+export default function Page({ searchParams }) {
+  const redirect = (searchParams && searchParams.redirect) || '/dashboard';
+  const reason = (searchParams && searchParams.reason) || ''; // 'unauthorized' ถ้ามาจาก middleware
 
-    const res = await fetch("/api/login", {
-      method: "POST",
-      body: JSON.stringify({ email, password }),
-      headers: { "Content-Type": "application/json" }
-    });
-
-    const data = await res.json();
-
-    if (data.token) {
-      localStorage.setItem("token", data.token);
-      alert("Login success");
-    } else {
-      alert("Login failed");
-    }
-  }
-
-  return (
-    <form onSubmit={handleLogin}>
-      <input type="email" value={email} onChange={e => setEmail(e.target.value)} />
-      <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-      <button type="submit">Login</button>
-    </form>
-  );
+  return <LoginClient redirect={redirect} reason={reason} />;
 }

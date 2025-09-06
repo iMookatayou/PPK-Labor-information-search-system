@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Sarabun&display=swap');
 
-/* ----------------------------------------
-  🧱 Layout พื้นฐานของหน้า
----------------------------------------- */
+/* ================================
+   Layout พื้นฐาน
+================================ */
 .pageContainer {
   display: flex;
   flex-direction: column;
@@ -15,30 +15,26 @@
   box-sizing: border-box;
 }
 
-/* ----------------------------------------
-  🧢 Header (แถบบน)
----------------------------------------- */
+/* ================================
+   Header (Top bar)
+================================ */
 .header {
   position: relative;
   display: flex;
   align-items: center;
   padding: 20px 40px;
-  background: 
-    linear-gradient(135deg, #3b82f6dd 0%, #60a5faaa 50%, #bfdbfeaa 100%), /* เบส gradient */
-    repeating-radial-gradient(
-      circle at 0 0,
+  background:
+    linear-gradient(135deg, #3b82f6dd 0%, #60a5faaa 50%, #bfdbfeaa 100%),
+    repeating-radial-gradient(circle at 0 0,
       rgba(255, 255, 255, 0.04),
       rgba(255, 255, 255, 0.04) 2px,
       transparent 2px,
-      transparent 6px
-    ), /* texture จุดละเอียด */
-    repeating-linear-gradient(
-      45deg,
+      transparent 6px),
+    repeating-linear-gradient(45deg,
       rgba(255, 255, 255, 0.02),
       rgba(255, 255, 255, 0.02) 1px,
       transparent 1px,
-      transparent 8px
-    ); /* texture เส้นบางมากๆ */
+      transparent 8px);
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
@@ -49,7 +45,7 @@
   overflow: hidden;
 }
 
-/* Overlay สีแสงแบบโปร่ง */
+/* overlay สวย ๆ */
 .header::after {
   content: '';
   position: absolute;
@@ -66,12 +62,12 @@
   z-index: 0;
 }
 
-.logo, .logoTopLeft {
-  width: 40px; 
+.logo,
+.logoTopLeft {
+  width: 80px;
   height: auto;
-  z-index: 9999;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
-  transition: transform 0.3s ease;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.15));
+  transition: transform .3s ease;
 }
 
 .logoTopLeft {
@@ -83,75 +79,78 @@
 }
 
 .title {
-  font-size: 1.3rem; /* ลดจาก 1.6rem */
+  font-size: 1.3rem;
   font-weight: 700;
-  color: #0f172a;
-  letter-spacing: 0.5px;
-  text-shadow: 0 0 6px rgba(255 255 255 / 0.85), 1px 1px 2px rgba(0, 0, 0, 0.1);
   margin-left: 12px;
+  letter-spacing: .5px;
+  color: #0f172a;
+  text-shadow: 0 0 6px rgba(255,255,255,.85), 1px 1px 2px rgba(0,0,0,.1);
 }
 
 .subtitle {
-  font-size: 0.9rem; /* ลดจาก 1rem */
-  color: #334155;
+  font-size: .9rem;
   margin-top: 3px;
   font-weight: 500;
-  letter-spacing: 0.3px;
-  text-shadow: 0 0 3px rgba(255 255 255 / 0.7);
+  color: #334155;
+  letter-spacing: .3px;
+  text-shadow: 0 0 3px rgba(255,255,255,.7);
 }
 
-/* ----------------------------------------
-  🔓 ปุ่ม Logout
----------------------------------------- */
-.logoutButton {
+/* ================================
+   ปุ่มใน header
+================================ */
+.logoutButton,
+.backBtn {
   position: absolute;
   top: 12px;
-  right: 16px;
   padding: 8px 16px;
-  background-color: #3498db;
-  color: #ffffff;
-  font-size: 0.9rem;
+  font-size: .9rem;
   font-weight: 600;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease;
+  color: #fff;
+  background: linear-gradient(90deg, #1b3f86, #2d63d6);
+  box-shadow: 0 3px 8px rgba(0,0,0,.15);
+  transition: all .3s ease;
+}
+.backBtn { right: 16px; }
+
+/* ถ้ามีปุ่ม Logout ด้วย ให้ถอยไปอยู่ถัดซ้ายของปุ่มย้อนกลับพอดี (ห่าง 10px)
+   ทริค: ใช้ความกว้างของปุ่มตัวเองเป็นฐานด้วย translateX */
+.logoutButton {
+  right: 16px;
+  transform: translateX(calc(-100% - 10px)); /* = เลื่อนซ้าย = ความกว้างปุ่มตัวเอง + 10px */
 }
 
-.logoutButton:hover {
-  background-color: #2980b9;
+.logoutButton:hover,
+.backBtn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 12px rgba(0,0,0,.2);
+  filter: brightness(1.05);
 }
 
-.logoutButton:focus {
-  outline: none;
-}
-
-/* ----------------------------------------
-  📦 ส่วนเนื้อหา
----------------------------------------- */
+/* ================================
+   Content
+================================ */
 .content {
   flex: 1 1 auto;
   padding: 16px;
-  background: #ffffff;
+  background: #fff;
   border: 1.5px solid #d6e4f1;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
   gap: 8px;
-
-  /* Texture แบบกริดบาง ๆ */
   background-image:
-    linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+    linear-gradient(to right, rgba(0,0,0,.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,.05) 1px, transparent 1px);
   background-size: 20px 20px;
 }
 
-/* ----------------------------------------
-  🧍 Row + ปุ่ม
----------------------------------------- */
+/* ================================
+   Rows / Buttons
+================================ */
 .row {
   display: flex;
   align-items: center;
@@ -159,37 +158,33 @@
   border-bottom: 1px solid #e4e9f0;
   gap: 8px;
 }
-
-.row:last-child {
-  border-bottom: none;
-}
+.row:last-child { border-bottom: none; }
 
 .row button {
   padding: 8px 12px;
-  background: linear-gradient(to right, #3b82f6, #2563eb);
   border: 1px solid #2563eb;
-  color: #ffffff;
-  font-size: 0.9rem;
-  font-weight: 600;
   border-radius: 6px;
+  font-size: .9rem;
+  font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.4);
-  transition: background 0.3s ease, box-shadow 0.3s ease;
+  color: #fff;
+  background: linear-gradient(to right, #3b82f6, #2563eb);
+  box-shadow: 0 2px 4px rgba(37,99,235,.4);
+  transition: background .3s ease, box-shadow .3s ease;
 }
-
 .row button:hover {
   background: linear-gradient(to right, #2563eb, #1e40af);
-  box-shadow: 0 4px 8px rgba(30, 64, 175, 0.4);
+  box-shadow: 0 4px 8px rgba(30,64,175,.4);
 }
 
-/* ----------------------------------------
-  🏷️ Labels และ Input Fields
----------------------------------------- */
+/* ================================
+   Labels / Inputs
+================================ */
 .label {
   min-width: 120px;
   padding-left: 6px;
   margin-right: 6px;
-  font-size: 0.95rem;
+  font-size: .95rem;
   font-weight: 600;
   color: #3b3b3b;
   white-space: nowrap;
@@ -197,21 +192,27 @@
 
 .selectInput,
 .inputDate {
-  font-size: 0.95rem;
+  font-size: .95rem;
   padding: 8px 12px;
-  border: 1px solid #cccccc;
-  background: #ffffff;
+  border: 1px solid #ccc;
+  background: #fff;
   border-radius: 6px;
   height: 40px;
   width: 100%;
-  box-sizing: border-box;
   outline: none;
+  font-family: 'Sarabun', sans-serif;
+  color: #333;
+  transition: border-color .3s ease, box-shadow .3s ease;
+}
+.selectInput:focus,
+.inputDate:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 5px rgba(59,130,246,.5);
 }
 
-/* ----------------------------------------
-  🔗 MultiSelect (react-select)
----------------------------------------- */
-
+/* ================================
+   react-select multiSelect
+================================ */
 .multiSelectInput {
   display: flex;
   align-items: center;
@@ -221,92 +222,48 @@
   height: 40px;
   width: 100%;
   box-sizing: border-box;
-  padding: 0 8px;         
+  padding: 0 8px;
   overflow-x: auto;
-  font-size: 0.95rem;     
+  font-size: .95rem;
   font-family: 'Sarabun', sans-serif;
-   position: relative; 
-  z-index: 10;        
-  pointer-events: auto; 
+  position: relative;
+  z-index: 10;
 }
-
 .multiSelectInput .css-1fdsijx-ValueContainer {
   flex-wrap: nowrap !important;
   overflow-x: auto !important;
   white-space: nowrap !important;
-  padding-left: 0 !important; 
+  padding-left: 0 !important;
 }
-
 .multiSelectInput .css-1p3m7a8-multiValue {
-  margin: 2px 4px;         
-  background-color: #e6f0ff;
+  margin: 2px 4px;
+  background: #e6f0ff;
   border-radius: 4px;
   padding: 2px 6px;
-  max-width: none !important;
   display: inline-flex;
   align-items: center;
-  font-size: 0.9rem;       
+  font-size: .9rem;
 }
-
 .multiSelectInput .css-12a83d4-MultiValueLabel {
-  white-space: nowrap !important;
-  overflow: visible !important;
-  text-overflow: unset !important;
   font-weight: 500;
   color: #003366;
+  white-space: nowrap !important;
 }
-
 .multiSelectInput .css-1u9des2-MultiValueRemove {
   cursor: pointer;
   padding-left: 4px;
   color: #555;
-  font-size: 1rem;
-  line-height: 1;
 }
+.multiSelectInput .css-1u9des2-MultiValueRemove:hover { color: red; }
 
-.multiSelectInput .css-1u9des2-MultiValueRemove:hover {
-  color: red;
-}
-
-.multiSelectInput .css-1xc3v61-indicatorContainer {
-  padding: 4px;
-  color: #666;
-  cursor: pointer;
-}
-
-/* ปรับให้ input และ select ปกติ ใน form เท่ากัน */
-.selectInput,
-.inputDate {
-  font-size: 0.95rem;
-  padding: 8px 12px;
-  border: 1px solid #cccccc;
-  background: #ffffff;
-  border-radius: 6px;
-  height: 40px;
-  width: 100%;
-  box-sizing: border-box;
-  outline: none;
-  font-family: 'Sarabun', sans-serif;
-  color: #333;
-  transition: border-color 0.3s ease;
-}
-
-.selectInput:focus,
-.inputDate:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
-}
-
-
-/* ----------------------------------------
-  🧩 กลุ่มปุ่มและ Input แนวนอน
----------------------------------------- */
+/* ================================
+   Groups
+================================ */
 .horizontalGroup {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
 }
-
 .buttonInlineGroup {
   display: flex;
   gap: 8px;
@@ -314,87 +271,62 @@
   justify-content: flex-end;
   flex-wrap: wrap;
 }
+.grayBackground { background-color: #f5f7fa; }
 
-.grayBackground {
-  background-color: #f5f7fa;
-}
-
-/* ----------------------------------------
-  📊 Gantt Chart (ตารางแผน)
----------------------------------------- */
+/* ================================
+   Gantt Chart
+================================ */
 .ganttContainer {
   flex: 1 1 auto;
   width: 100%;
   overflow-x: auto;
-  background-color: #ffffff;
+  background: #fff;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,.1);
   display: flex;
   flex-direction: column;
 }
-
 .ganttTable {
   width: 100%;
   min-width: 900px;
   border-collapse: collapse;
   font-family: 'Sarabun', sans-serif;
 }
-
 .ganttTable th,
 .ganttTable td {
   padding: 10px 12px;
-  text-align: left;
-  border: 1px solid #000000;
-  font-size: 0.95rem;
-  background-color: #ffffff;
-  color: #000000;
+  border: 1px solid #000;
+  font-size: .95rem;
+  background: #fff;
+  color: #000;
   white-space: nowrap;
 }
-
 .ganttTable th {
   font-weight: bold;
-  background-color: #f0f0f0;
+  background: #f0f0f0;
 }
+.ganttTable tr:nth-child(even) { background: #fafafa; }
+.ganttTable tr:hover { background: #e0e0e0; }
 
-.ganttTable tr:nth-child(even) {
-  background-color: #fafafa;
-}
-
-.ganttTable tr:hover {
-  background-color: #e0e0e0;
-}
-
-/* ----------------------------------------
-  📜 Scrollbar ด้านล่าง
----------------------------------------- */
+/* ================================
+   Scrollbar ล่าง
+================================ */
 .scrollbar {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  bottom: 0; left: 0; right: 0;
   height: 12px;
   background: #f4f7f6;
-  border-top: 1px solid #cccccc;
+  border-top: 1px solid #ccc;
   overflow-x: auto;
   overflow-y: hidden;
   z-index: 100;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
-  scrollbar-color: #888888 transparent;
+  scrollbar-color: #888 transparent;
 }
-
-.scrollbar::-webkit-scrollbar {
-  height: 12px;
-  background: transparent;
-}
-
+.scrollbar::-webkit-scrollbar { height: 12px; }
 .scrollbar::-webkit-scrollbar-thumb {
-  background: #888888;
+  background: #888;
   border-radius: 8px;
 }
-
-.scrollbar > div {
-  height: 1px;
-}
-
-
+.scrollbar > div { height: 1px; }

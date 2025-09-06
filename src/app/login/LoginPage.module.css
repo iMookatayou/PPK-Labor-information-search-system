@@ -1,0 +1,159 @@
+@import url("https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap");
+
+/* ================================
+   PAGE BASE
+   ================================ */
+.page {
+  font-family: "Sarabun", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: #0f172a;
+  min-height: 100dvh;
+  background: #f3f6fb;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+/* ================================
+   HEADER
+   ================================ */
+.headerBand {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 16px;
+  padding: clamp(14px, 2vw, 20px) clamp(18px, 3vw, 32px);
+  color: #fff;
+  background: linear-gradient(135deg, #103056 0%, #1b3f86 50%, #214aa1 100%);
+  box-shadow: 0 3px 10px rgba(16, 42, 86, 0.25);
+}
+.logo { width: clamp(36px, 4.2vw, 48px); height: auto; }
+.title { font-size: 1.3rem; font-weight: 700; margin: 0; }
+.subtitle { font-size: 1rem; opacity: .92; margin: 0; }
+
+/* ================================
+   CARD (กรอบเหลี่ยม ๆ)
+   ================================ */
+.card {
+  width: min(440px, 94vw);
+  margin: clamp(40px, 6vw, 64px) auto;
+  background: #fff;
+  border: 1px solid #e1e6f0;
+  border-radius: 12px;
+  box-shadow: 0 8px 22px rgba(16, 42, 110, 0.12);
+  padding: clamp(24px, 4vw, 32px);
+}
+.formTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed #d9e2f3;
+}
+
+/* ================================
+   FORM
+   ================================ */
+.form { display: grid; gap: 16px; }
+.field { display: grid; gap: 6px; }
+.label {
+  font-weight: 600;
+  font-size: .95rem;
+  color: #1f2937;
+}
+
+/* input */
+.inputWrap { position: relative; display: grid; }
+.input {
+  height: 46px;
+  border-radius: 10px;
+  border: 1px solid #d6e4f1;
+  background: #fff;
+  padding: 0 12px;
+  font-size: 1rem;
+  color: #1f2937;
+  transition: border-color .16s ease, box-shadow .18s ease;
+}
+.input::placeholder { color: #9aa9bf; }
+.input:hover { border-color: #c0d3eb; }
+.input:focus { outline: none; border-color: #2d63d6; box-shadow: 0 0 0 3px rgba(45,99,214,.2); }
+
+/* eye button */
+.eyeBtn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 30px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid #e6edf7;
+  background: #f8fbff;
+  color: #1e3a8a;
+  font-size: .82rem;
+  cursor: pointer;
+}
+.eyeBtn:hover { background: #eef5ff; }
+
+/* ================================
+   FEEDBACK
+   ================================ */
+.hintWarn {
+  margin-top: 4px;
+  font-size: .85rem;
+  color: #b45309;
+  background: #fff7ed;
+  border: 1px solid #fde7c5;
+  border-radius: 8px;
+  padding: 6px 10px;
+}
+.errorBox {
+  border: 1px solid #fecaca;
+  background: #fff1f2;
+  color: #991b1b;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: .9rem;
+}
+
+/* ================================
+   BUTTONS
+   ================================ */
+
+.actions {
+  margin-top: 20px;
+}
+.submitBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;              /* เว้นระยะข้อความกับไอคอน */
+  height: 48px;
+  width: 100%;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, #214aa1, #2d63d6);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .2s ease;
+}
+.submitBtn:hover { box-shadow: 0 6px 18px rgba(33,74,161,.3); }
+.submitBtn:active { transform: translateY(1px); }
+
+
+/* ================================
+   FOOTER
+   ================================ */
+.disclaimer {
+  margin: 12px 0 0;
+  font-size: .88rem;
+  color: #64748b;
+  text-align: center;
+}
+.footer {
+  display: grid;
+  place-items: center;
+  padding: 20px 16px;
+  color: #64748b;
+}
+.footer small { font-size: .88rem; }
