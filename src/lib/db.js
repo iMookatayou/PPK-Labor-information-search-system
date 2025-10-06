@@ -1,7 +1,5 @@
-// src/lib/db.js
 import mysql from 'mysql2/promise';
 
-// ใช้ singleton pool ป้องกันการสร้าง connection pool ซ้ำตอน hot reload
 let pool;
 
 export function getPool() {
