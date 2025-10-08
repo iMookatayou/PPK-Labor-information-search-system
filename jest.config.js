@@ -1,9 +1,8 @@
-// jest.config.js
 module.exports = {
-  testEnvironment: 'jsdom', // ← สำคัญ
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'], // เพื่อเตรียม environment
+  testEnvironment: 'jsdom', 
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'], 
   moduleNameMapper: {
-    // สำหรับ import CSS/ภาพ (optional)
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy'
   }
 };
+
