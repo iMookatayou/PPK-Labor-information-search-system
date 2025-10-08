@@ -4,10 +4,6 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import { fetchLocations } from '@/app/api/apiService/route';
 
-/**
- * ปิด SSR ของ react-select กัน hydration mismatch
- * และโชว์ skeleton ชั่วคราวระหว่างโหลด
- */
 const Select = dynamic(() => import('react-select'), {
   ssr: false,
   loading: () => (
@@ -27,7 +23,6 @@ export default function MultiLocationDropdown({ value = [], onChange, maxSelect 
   const [loading, setLoading] = useState(false);
   const [portalTarget, setPortalTarget] = useState(null);
 
-  // โหลดข้อมูลห้องตรวจครั้งแรก
   useEffect(() => {
     let alive = true;
     const loadLocations = async () => {
@@ -53,12 +48,10 @@ export default function MultiLocationDropdown({ value = [], onChange, maxSelect 
     };
   }, []);
 
-  // ตั้ง portal target หลัง mount (กัน hydration mismatch)
   useEffect(() => {
     setPortalTarget(typeof document !== 'undefined' ? document.body : null);
   }, []);
 
-  // แปลงเป็น options ของ react-select
   const options = useMemo(() => {
     const seen = new Set();
     return locations
@@ -73,15 +66,13 @@ export default function MultiLocationDropdown({ value = [], onChange, maxSelect 
       }));
   }, [locations]);
 
-  // map จาก value → option[]
   const selectedOptions = useMemo(() => {
     if (!value || value.length === 0) return [];
-    if (typeof value[0] === 'object') return value; // กรณีส่ง object[] มา
+    if (typeof value[0] === 'object') return value; 
     const valSet = new Set(value.map(String));
     return options.filter((opt) => valSet.has(opt.value));
   }, [value, options]);
 
-  // handle change (จำกัดเลือกไม่เกิน maxSelect)
   const handleChange = useCallback(
     (selected) => {
       if (selected && selected.length > maxSelect) {
@@ -143,3 +134,4 @@ export default function MultiLocationDropdown({ value = [], onChange, maxSelect 
     </div>
   );
 }
+
