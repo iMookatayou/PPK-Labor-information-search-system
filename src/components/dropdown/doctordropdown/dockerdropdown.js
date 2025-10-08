@@ -4,10 +4,6 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import { fetchDoctors } from '@/app/api/apiService/route';
 
-/**
- * ปิด SSR ของ react-select เพื่อกัน hydration mismatch
- * และโชว์ skeleton เล็กๆ ระหว่างโหลด
- */
 const Select = dynamic(() => import('react-select'), {
   ssr: false,
   loading: () => (
@@ -25,24 +21,17 @@ const Select = dynamic(() => import('react-select'), {
 const NONE_OPTION = { value: '0', label: 'ไม่ระบุแพทย์' };
 
 export default function DoctorDropdown({
-  /** ค่าที่เลือกเป็น array ของ id (string[]) เช่น ['12','25'] หรือ ['0'] */
   value = [],
-  /** onChange: (ids: string[]) => void */
   onChange,
-  /** ถ้ามี options จากภายนอก ส่งเข้ามาได้ (list แพทย์ดิบจาก API) */
   options,
-  /** ปรับความกว้างขั้นต่ำของกล่องได้ */
   minWidth = 300,
-  /** ปิดการใช้งาน */
   isDisabled = false,
-  /** placeholder */
   placeholder = 'ค้นหาแพทย์หรือ ID',
 }) {
   const [doctors, setDoctors] = useState(options || []);
   const [loading, setLoading] = useState(false);
-  const [portalTarget, setPortalTarget] = useState(null); // menuPortalTarget หลัง mount
+  const [portalTarget, setPortalTarget] = useState(null); 
 
-  // โหลดรายชื่อแพทย์ถ้าไม่ส่ง options เข้ามา
   useEffect(() => {
     if (options && options.length > 0) {
       setDoctors(options);
@@ -67,12 +56,10 @@ export default function DoctorDropdown({
     };
   }, [options]);
 
-  // ตั้ง portal target หลัง mount (กันอ้าง document ตอน SSR)
   useEffect(() => {
     setPortalTarget(typeof document !== 'undefined' ? document.body : null);
   }, []);
 
-  // สร้าง option list สำหรับ react-select (รวม “ไม่ระบุแพทย์” ด้านบน)
   const doctorOptions = useMemo(() => {
     const seen = new Set();
     const list = [];
@@ -94,16 +81,12 @@ export default function DoctorDropdown({
     return [NONE_OPTION, ...list];
   }, [doctors]);
 
-  // map จาก id[] → option[]
   const selectedOptions = useMemo(() => {
     if (!Array.isArray(value) || value.length === 0) return [];
     const setVal = new Set(value.map(String));
     return doctorOptions.filter((opt) => setVal.has(opt.value));
   }, [value, doctorOptions]);
 
-  // onChange ของ react-select → คืนเป็น id[] ตามกติกา:
-  // - ถ้ามี '0' (ไม่ระบุ) ปะปน ให้เหลือแค่ '0'
-  // - ถ้าไม่มี selection คืน []
   const handleChange = useCallback(
     (selected) => {
       const ids = Array.isArray(selected) ? selected.map((o) => o.value) : [];
@@ -121,8 +104,8 @@ export default function DoctorDropdown({
   return (
     <div className="w-full" suppressHydrationWarning>
       <Select
-        instanceId="doctor-dropdown"                 // ค่าคงที่ กันแอตทริบิวต์แกว่ง
-        inputId="react-select-doctor-dropdown-input" // id คงที่
+        instanceId="doctor-dropdown"                
+        inputId="react-select-doctor-dropdown-input" 
         isMulti
         isSearchable
         isDisabled={isDisabled}
@@ -169,3 +152,4 @@ export default function DoctorDropdown({
     </div>
   );
 }
+
