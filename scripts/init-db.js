@@ -1,6 +1,5 @@
-// CommonJS เวิร์กชัวร์กับ node ทุกเวอร์ชัน
 const mysql = require('mysql2/promise');
-require('dotenv').config({path: '.env.local' }); // โหลด .env ที่ root
+require('dotenv').config({path: '.env.local' }); 
 
 function need(name) {
   const v = process.env[name];
@@ -20,19 +19,16 @@ function need(name) {
       throw new Error('DB_NAME must be alphanumeric/underscore only');
     }
 
-    // ต่อเข้า MySQL โดยยังไม่เลือก DB
     const conn = await mysql.createConnection({
       host, port, user, password,
       multipleStatements: true,
     });
 
-    // สร้าง DB ถ้าไม่มี แล้วสลับเข้ามาใช้
     await conn.query(
       `CREATE DATABASE IF NOT EXISTS \`${dbName}\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`
     );
     await conn.query(`USE \`${dbName}\`;`);
 
-    // สร้างตาราง users
     await conn.query(`
       CREATE TABLE IF NOT EXISTS users (
         id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
