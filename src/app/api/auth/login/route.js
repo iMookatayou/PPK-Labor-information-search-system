@@ -1,16 +1,13 @@
-// src/app/api/auth/login/route.js
 import { NextResponse } from 'next/server'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 import { getPool } from '@/lib/db'
 
-/** บังคับให้รันบน Node (เพราะใช้ bcryptjs + DB) */
 export const runtime = 'nodejs'
 
-/** ค่าคงที่/ตั้งค่า JWT */
-const ONE_DAY = 24 * 60 * 60 // seconds
-const JWT_ISSUER = 'ppk-app'      // ปรับได้
-const JWT_AUDIENCE = 'ppk-users'  // ปรับได้
+const ONE_DAY = 24 * 60 * 60 
+const JWT_ISSUER = 'ppk-app'      
+const JWT_AUDIENCE = 'ppk-users' 
 
 function requireJwtSecret() {
   const secret = process.env.JWT_SECRET
@@ -18,7 +15,6 @@ function requireJwtSecret() {
   return secret
 }
 
-/** รองรับ JWT_EXPIRES เป็นวินาทีหรือรูปแบบ 1d/12h/30m/45s */
 function parseExpires(input, fallbackSec = ONE_DAY) {
   if (!input) return { jwtExpires: fallbackSec, cookieMaxAge: fallbackSec }
   const trimmed = String(input).trim()
@@ -45,7 +41,6 @@ export async function POST(req) {
     const JWT_SECRET = requireJwtSecret()
     const { jwtExpires, cookieMaxAge } = parseExpires(process.env.JWT_EXPIRES, ONE_DAY)
 
-    /* -------- อ่าน credential จาก JSON หรือ FormData -------- */
     let username = ''
     let password = ''
     try {
@@ -60,13 +55,11 @@ export async function POST(req) {
         password = String(form.get('password') || '')
       }
     } catch {}
-    username = username.trim() // ถ้าต้องการไม่แคร์ตัวพิมพ์ใหญ่ ให้ .toLowerCase()
-
+    username = username.trim() 
     if (!username || !password) {
       return NextResponse.json({ ok: false, message: 'กรุณากรอกชื่อผู้ใช้และรหัสผ่าน' }, { status: 400 })
     }
 
-    /* -------------------- ตรวจสอบกับฐานข้อมูล -------------------- */
     const pool = getPool()
     const [rows] = await pool.execute(
       'SELECT id, username, password_hash, role, is_active FROM users WHERE username = ? LIMIT 1',
@@ -85,17 +78,14 @@ export async function POST(req) {
       return NextResponse.json({ ok: false, message: 'รหัสผ่านไม่ถูกต้อง' }, { status: 401 })
     }
 
-    /* ------------------------- ออก JWT ------------------------- */
     const { searchParams } = new URL(req.url)
     const redirect = searchParams.get('redirect') || '/dashboard'
-    // หมายเหตุ: jwt.sign รองรับ expiresIn เป็นจำนวนวินาทีหรือ string (เช่น '1d')
     const token = jwt.sign(
       { sub: user.id, username: user.username, role: user.role },
       JWT_SECRET,
       { expiresIn: jwtExpires, issuer: JWT_ISSUER, audience: JWT_AUDIENCE }
     )
 
-    /* ------------- เซ็ตคุกกี้ (รองรับ HTTP/HTTPS อัตโนมัติ) ------------- */
     const isHttps =
       req.headers.get('x-forwarded-proto') === 'https' ||
       new URL(req.url).protocol === 'https:'
@@ -108,10 +98,9 @@ export async function POST(req) {
 
     res.cookies.set('access_token', token, {
       httpOnly: true,
-      secure: isHttps,                      // dev (HTTP) -> false, prod (HTTPS) -> true
-      sameSite: isHttps ? 'none' : 'lax',   // ข้ามโดเมนจริง ใช้ none + secure:true
+      secure: isHttps,                      
+      sameSite: isHttps ? 'none' : 'lax',   
       path: '/',
-      // domain: '.yourdomain.com',         // (ถ้าต้องแชร์คุกกี้ข้ามซับโดเมน ค่อยเปิด)
       maxAge: cookieMaxAge,
     })
 
