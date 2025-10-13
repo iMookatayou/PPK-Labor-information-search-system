@@ -12,7 +12,6 @@ export default function DatePicker({
 }) {
   return (
     <div className={styles.datePickerRow}>
-      {/* วันที่เริ่มต้น */}
       <div className={styles.formGroup}>
         <label htmlFor="start-date" className={`${labelClassName} ${styles.boldLabel}`}>
           วันที่เริ่มต้น
@@ -26,7 +25,6 @@ export default function DatePicker({
         />
       </div>
 
-      {/* วันที่สิ้นสุด */}
       <div className={styles.formGroup}>
         <label htmlFor="end-date" className={`${labelClassName} ${styles.boldLabel}`}>
           วันที่สิ้นสุด
@@ -42,4 +40,5 @@ export default function DatePicker({
     </div>
   );
 }
+
 
