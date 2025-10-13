@@ -186,15 +186,12 @@ export default function Page() {
           className={styles.logo}
         />
         <h1 className={styles.title}>P R A P O K K L A O - API</h1>
-
         <button type="button" className={styles.backBtn} onClick={handleBackDashboard}>
-          ⬅ กลับ Dashboard
+           กลับ Dashboard
         </button>
       </div>
-
       <div className={styles.content}>
         <div className={`${styles.row} ${styles.horizontalGroup} ${styles.grayBackground}`}>
-          {/* Doctor */}
           <div className={styles.inputGroup}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', maxWidth: '300px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -224,8 +221,7 @@ export default function Page() {
               />
             </div>
           </div>
-
-          {/* Date Picker */}
+                
           <DatePicker
             startDate={selectedDateRange.startDate}
             endDate={selectedDateRange.endDate}
