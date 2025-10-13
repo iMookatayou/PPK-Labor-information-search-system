@@ -12,7 +12,7 @@
   max-width: 100%;
   overflow-x: auto;
 
-  background-color: #ffffff;  /* เปลี่ยนจาก gradient เป็นสีขาวเรียบ */
+  background-color: #ffffff;  
   border: 1px solid #e5e7eb;
   border-radius: 16px;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
@@ -220,3 +220,4 @@
     min-width: 600px;
   }
 }
+
