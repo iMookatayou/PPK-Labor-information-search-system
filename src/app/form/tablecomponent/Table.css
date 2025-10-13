@@ -21,15 +21,12 @@
   font-size: 16px;
   color: #111827;
 
-  /* Smooth transition for hover effects */
   transition: all 0.3s ease;
 
-  /* Scrollbar Styling for Firefox */
   scrollbar-width: thin;
   scrollbar-color: #3b82f6 #f3f4f6;
 }
 
-/* Scrollbar Styling for Webkit browsers (Chrome, Safari, Edge) */
 .ganttContainer::-webkit-scrollbar {
   height: 8px;
 }
@@ -220,4 +217,5 @@
     min-width: 600px;
   }
 }
+
 
