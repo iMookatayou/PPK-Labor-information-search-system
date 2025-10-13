@@ -187,13 +187,11 @@ export default function Page() {
         />
         <h1 className={styles.title}>P R A P O K K L A O - API</h1>
 
-        {/* ปุ่มย้อนกลับ Dashboard */}
         <button type="button" className={styles.backBtn} onClick={handleBackDashboard}>
           ⬅ กลับ Dashboard
         </button>
       </div>
 
-      {/* Form Content */}
       <div className={styles.content}>
         <div className={`${styles.row} ${styles.horizontalGroup} ${styles.grayBackground}`}>
           {/* Doctor */}
