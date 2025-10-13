@@ -12,7 +12,6 @@ import { fetchDoctors, fetchLocations, fetchContact } from '@/app/api/apiService
 import { UserRound, Hospital } from 'lucide-react';
 
 export default function Page() {
-  /* ===================== States ===================== */
   const [selectedDoctors, setSelectedDoctors] = useState([]);
   const [selectedLocations, setSelectedLocations] = useState([]);
 
@@ -63,7 +62,6 @@ export default function Page() {
     loadInitialData();
   }, []);
 
-  /* ===================== Handlers ===================== */
   const handleLogout = useCallback(() => {
     window.location.href = '/login';
   }, []);
@@ -81,7 +79,6 @@ export default function Page() {
     setError(null);
   }, []);
 
-  /* ===================== Options ===================== */
   const doctorOptions = useMemo(
     () =>
       doctors.map((doc) => ({
@@ -100,7 +97,6 @@ export default function Page() {
     [locations]
   );
 
-  /* ===================== Dropdown onChange ===================== */
   const handleDoctorChange = useCallback(
     (selectedOptions) => {
       if (!selectedOptions || selectedOptions.length === 0) {
@@ -129,8 +125,7 @@ export default function Page() {
     }
     setIsSearching(false);
   }, []);
-
-  /* ===================== Search ===================== */
+  
   const handleSearch = useCallback(async () => {
     setLoading(true);
 
@@ -153,8 +148,8 @@ export default function Page() {
       const payload = {
         beginDate,
         endDate,
-        locationID: selectedLocationIDs, // string[]
-        mainDoctorID: filteredDoctorIDs, // string[]
+        locationID: selectedLocationIDs,
+        mainDoctorID: filteredDoctorIDs, 
       };
 
       const response = await fetchContact(payload);
@@ -169,7 +164,6 @@ export default function Page() {
     }
   }, [selectedDoctors, selectedLocations, selectedDateRange]);
 
-  /* ===================== Derived values for GanttChart ===================== */
   const chartDoctorIDs = useMemo(
     () => (selectedDoctors.some((d) => d.value === '0') ? [] : selectedDoctors.map((d) => Number(d.value))),
     [selectedDoctors]
@@ -180,7 +174,6 @@ export default function Page() {
     [selectedLocations]
   );
 
-  /* ===================== Render ===================== */
   return (
     <div className={styles.pageContainer}>
       {/* Header */}
