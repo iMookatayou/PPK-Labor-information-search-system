@@ -248,7 +248,6 @@ export default function Page() {
           disabled={doctors.length === 0 || locations.length === 0 || loading}
         />
 
-        {/* Loading/Error/Chart */}
         {loading && <div>กำลังโหลดข้อมูล...</div>}
         {error && <div className={styles.error}>{error}</div>}
         {isSearching && !loading && (
