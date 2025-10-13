@@ -176,7 +176,6 @@ export default function Page() {
 
   return (
     <div className={styles.pageContainer}>
-      {/* Header */}
       <div className={styles.header}>
         <img
           src="/images/prapokklaologo.png"
@@ -206,7 +205,6 @@ export default function Page() {
               />
             </div>
           </div>
-
           <div className={styles.inputGroup}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', maxWidth: '300px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -221,7 +219,6 @@ export default function Page() {
               />
             </div>
           </div>
-                
           <DatePicker
             startDate={selectedDateRange.startDate}
             endDate={selectedDateRange.endDate}
@@ -233,14 +230,12 @@ export default function Page() {
             }
           />
         </div>
-
         <SearchButtons
           onSearch={handleSearch}
           onClear={handleClear}
           disabled={doctors.length === 0 || locations.length === 0 || loading}
         />
-
-        {loading && <div>กำลังโหลดข้อมูล...</div>}
+        {loading && <div>กำลังโหลดข้อมูล</div>}
         {error && <div className={styles.error}>{error}</div>}
         {isSearching && !loading && (
           <GanttChart
