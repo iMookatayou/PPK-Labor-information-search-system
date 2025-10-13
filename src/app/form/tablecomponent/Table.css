@@ -64,19 +64,17 @@
 .ganttTable {
   width: 100%;
   min-width: 1000px;
-  border-collapse: separate; /* เพื่อใช้ border-radius ได้ */
+  border-collapse: separate; 
   border-spacing: 0;
   overflow: hidden;
 
   background-color: #ffffff;
   border-radius: 12px;
 
-  /* ป้องกันปัญหา overflow หรือเลื่อนซ้อนกัน */
   table-layout: fixed;
-  word-break: break-word; /* ช่วยให้ข้อความในเซลล์ไม่ล้น */
+  word-break: break-word;
 }
 
-/* --- TABLE HEADERS --- */
 .ganttTable th {
   padding: 14px 20px;
 
@@ -89,7 +87,6 @@
   background-color: #f3f4f6;
   box-shadow: inset 0 -2px 3px rgba(0, 0, 0, 0.05);
 
-  /* ทำให้หัวตารางติดกับด้านบนเวลา scroll */
   position: sticky;
   top: 0;
   z-index: 2;
@@ -217,5 +214,6 @@
     min-width: 600px;
   }
 }
+
 
 
