@@ -210,7 +210,6 @@ export default function Page() {
             </div>
           </div>
 
-          {/* Location */}
           <div className={styles.inputGroup}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', maxWidth: '300px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -239,7 +238,6 @@ export default function Page() {
           />
         </div>
 
-        {/* Buttons */}
         <SearchButtons
           onSearch={handleSearch}
           onClear={handleClear}
