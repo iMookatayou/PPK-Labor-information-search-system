@@ -17,15 +17,12 @@ export default function LoginClient({ redirect, reason }) {
   const emailRef = useRef(null);
 
   useEffect(() => {
-    // โฟกัสช่องอีเมล
-    if (emailRef.current) emailRef.current.focus();
 
-    // โดนเตะจาก middleware
+    if (emailRef.current) emailRef.current.focus();
     if (reason === 'unauthorized') {
       setErr('คุณยังไม่ได้เข้าสู่ระบบ กรุณาเข้าสู่ระบบก่อนเข้าถึงหน้านี้');
     }
 
-    // อ่าน flash message จากคุกกี้ (ถ้าตั้ง non-httpOnly)
     const cookie = typeof document !== 'undefined' ? document.cookie : '';
     const m = cookie.match(/(?:^|;\s*)auth_msg=([^;]+)/);
     if (m) {
@@ -33,7 +30,6 @@ export default function LoginClient({ redirect, reason }) {
         const msg = decodeURIComponent(m[1]);
         if (msg) setErr(msg);
       } catch {}
-      // ลบแฟลชคุกกี้ (one-time)
       document.cookie = 'auth_msg=; Max-Age=0; path=/';
     }
   }, [reason]);
