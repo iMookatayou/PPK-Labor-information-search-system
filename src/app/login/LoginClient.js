@@ -44,7 +44,6 @@ export default function LoginClient({ redirect, reason }) {
       const res = await fetch(`/api/auth/login?redirect=${encodeURIComponent(redirect)}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        // backend ใช้ username → map จาก email
         body: JSON.stringify({ username: email.trim(), password }),
       });
 
