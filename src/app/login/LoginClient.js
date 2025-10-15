@@ -56,7 +56,6 @@ export default function LoginClient({ redirect, reason }) {
         return;
       }
 
-      // Cookie ถูกตั้งฝั่ง server แล้ว
       router.replace(data.redirect || '/dashboard');
     } catch {
       setErr('ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้');
