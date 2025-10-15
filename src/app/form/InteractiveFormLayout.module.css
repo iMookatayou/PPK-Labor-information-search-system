@@ -116,8 +116,6 @@
 }
 .backBtn { right: 16px; }
 
-/* ถ้ามีปุ่ม Logout ด้วย ให้ถอยไปอยู่ถัดซ้ายของปุ่มย้อนกลับพอดี (ห่าง 10px)
-   ทริค: ใช้ความกว้างของปุ่มตัวเองเป็นฐานด้วย translateX */
 .logoutButton {
   right: 16px;
   transform: translateX(calc(-100% - 10px)); /* = เลื่อนซ้าย = ความกว้างปุ่มตัวเอง + 10px */
@@ -330,3 +328,4 @@
   border-radius: 8px;
 }
 .scrollbar > div { height: 1px; }
+
